@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="SachZhong-User.app-user.main" target="1.8" />
+      <module name="SachZhong-User.app-user.test" target="1.8" />
+      <module name="SachZhong-User.app.app-base.main" target="1.8" />
+      <module name="SachZhong-User.app.app-base.test" target="1.8" />
+      <module name="SachZhong-User.app.app-manager.main" target="1.8" />
+      <module name="SachZhong-User.app.app-manager.test" target="1.8" />
+      <module name="SachZhong-User.app.untitled.main" target="1.8" />
+      <module name="SachZhong-User.app.untitled.test" target="1.8" />
+      <module name="SachZhong-User.common.demo-auth.main" target="1.8" />
+      <module name="SachZhong-User.common.demo-auth.test" target="1.8" />
+      <module name="SachZhong-User.common.demo-core.main" target="1.8" />
+      <module name="SachZhong-User.common.demo-core.test" target="1.8" />
+      <module name="SachZhong-User.common.user-core.main" target="1.8" />
+      <module name="SachZhong-User.common.user-core.test" target="1.8" />
+      <module name="SachZhong-User.constant.demo-constant.main" target="1.8" />
+      <module name="SachZhong-User.constant.demo-constant.test" target="1.8" />
+      <module name="SachZhong-User.interface.demo-manager-interface.main" target="1.8" />
+      <module name="SachZhong-User.interface.demo-manager-interface.test" target="1.8" />
+      <module name="SachZhong-User.main" target="1.8" />
+      <module name="SachZhong-User.service.demo-service.main" target="1.8" />
+      <module name="SachZhong-User.service.demo-service.test" target="1.8" />
+      <module name="SachZhong-User.test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

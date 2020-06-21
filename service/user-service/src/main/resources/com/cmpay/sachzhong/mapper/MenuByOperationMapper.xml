@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmpay.sachzhong.dao.IMenuByOperationDao" >
+
+    <resultMap id="BaseResultMap" type="com.cmpay.sachzhong.entity.MenuByOperationDO" >
+        <result column="menubyoperation_id" property="menubyoperationId" jdbcType="INTEGER" />
+        <result column="menubyoperation_operationid" property="menubyoperationOperationid" jdbcType="INTEGER" />
+        <result column="menubyoperation_menuid" property="menubyoperationMenuid" jdbcType="INTEGER" />
+        <result column="menubyoperation_back" property="menubyoperationBack" jdbcType="VARCHAR" />
+        <result column="menubyoperation_opuserid" property="menubyoperationOpuserid" jdbcType="INTEGER" />
+        <result column="menubyoperation_deletetype" property="menubyoperationDeletetype" jdbcType="VARCHAR" />
+        <result column="menubyoperation_foundtime" property="menubyoperationFoundtime" jdbcType="TIMESTAMP" />
+        <result column="menubyoperation_updatetime" property="menubyoperationUpdatetime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        menubyoperation_id,menubyoperation_operationid,menubyoperation_menuid,menubyoperation_back
+    </sql>
+
+    <insert id="insert" parameterType="com.cmpay.sachzhong.entity.MenuByOperationDO" >
+        insert into sachzhong_menubyoperation
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="menubyoperationId != null" >
+                menubyoperation_id,
+            </if>
+            <if test="menubyoperationOperationid != null" >
+                menubyoperation_operationid,
+            </if>
+            <if test="menubyoperationMenuid != null" >
+                menubyoperation_menuid,
+            </if>
+            <if test="menubyoperationBack != null" >
+                menubyoperation_back,
+            </if>
+            <if test="menubyoperationOpuserid != null" >
+                menubyoperation_opuserid,
+            </if>
+            <if test="menubyoperationDeletetype != null" >
+                menubyoperation_deletetype,
+            </if>
+            <if test="menubyoperationFoundtime != null" >
+                menubyoperation_foundtime,
+            </if>
+            <if test="menubyoperationUpdatetime != null" >
+                menubyoperation_updatetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="menubyoperationId != null" >
+                #{menubyoperationId,jdbcType=INTEGER},
+            </if>
+            <if test="menubyoperationOperationid != null" >
+                #{menubyoperationOperationid,jdbcType=INTEGER},
+            </if>
+            <if test="menubyoperationMenuid != null" >
+                #{menubyoperationMenuid,jdbcType=INTEGER},
+            </if>
+            <if test="menubyoperationBack != null" >
+                #{menubyoperationBack,jdbcType=VARCHAR},
+            </if>
+            <if test="menubyoperationOpuserid != null" >
+                #{menubyoperationOpuserid,jdbcType=INTEGER},
+            </if>
+            <if test="menubyoperationDeletetype != null" >
+                #{menubyoperationDeletetype,jdbcType=VARCHAR},
+            </if>
+            <if test="menubyoperationFoundtime != null" >
+                #{menubyoperationFoundtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="menubyoperationUpdatetime != null" >
+                #{menubyoperationUpdatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="find" resultMap="BaseResultMap" parameterType="com.cmpay.sachzhong.entity.MenuByOperationDO" >
+        select 
+        <include refid="Base_Column_List" />
+        from sachzhong_menubyoperation
+        <where >
+            <if test="menubyoperationId != null" >
+                and menubyoperation_id = #{menubyoperationId,jdbcType=INTEGER}
+            </if>
+            <if test="menubyoperationOperationid != null" >
+                and menubyoperation_operationid = #{menubyoperationOperationid,jdbcType=INTEGER}
+            </if>
+            <if test="menubyoperationMenuid != null" >
+                and menubyoperation_menuid = #{menubyoperationMenuid,jdbcType=INTEGER}
+            </if>
+            <if test="menubyoperationBack != null" >
+                and menubyoperation_back = #{menubyoperationBack,jdbcType=VARCHAR}
+            </if>
+            <if test="menubyoperationOpuserid != null" >
+                and menubyoperation_opuserid = #{menubyoperationOpuserid,jdbcType=INTEGER}
+            </if>
+            <if test="menubyoperationDeletetype != null" >
+                and menubyoperation_deletetype = #{menubyoperationDeletetype,jdbcType=VARCHAR}
+            </if>
+            <if test="menubyoperationFoundtime != null" >
+                and menubyoperation_foundtime = #{menubyoperationFoundtime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="menubyoperationUpdatetime != null" >
+                and menubyoperation_updatetime = #{menubyoperationUpdatetime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+</mapper>

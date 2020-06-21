@@ -1,0 +1,25 @@
+apply plugin: 'org.springframework.boot'
+dependencies {
+    compile project(':common:user-auth')
+    compile project(':service:user-service')
+    compile("com.cmpay:lemon-framework-starter-cloud")
+    compile("org.springframework.data:spring-data-redis:1.8.11.RELEASE")
+    compile("org.springframework.kafka:spring-kafka:1.3.2.RELEASE")
+    compile("com.cmpay:lemon-swagger-starter")
+    compile("mysql:mysql-connector-java:8.0.15")
+}
+
+bootRepackage {
+    enabled = true
+    mainClass = 'com.cmpay.sachzhong.UserApplication'
+}
+
+jar {
+    manifest {
+        attributes(
+                "Implementation-Title": "Gradle",
+                "Implementation-Version": "${version}",
+                "Class-Path": '. config/'
+        )
+    }
+}

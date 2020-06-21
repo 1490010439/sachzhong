@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmpay.sachzhong.dao.IOperationDao" >
+
+    <resultMap id="BaseResultMap" type="com.cmpay.sachzhong.entity.OperationDO" >
+        <result column="operation_id" property="operationId" jdbcType="INTEGER" />
+        <result column="operation_name" property="operationName" jdbcType="VARCHAR" />
+        <result column="operation_grade" property="operationGrade" jdbcType="INTEGER" />
+        <result column="operation_number" property="operationNumber" jdbcType="VARCHAR" />
+        <result column="operation_type" property="operationType" jdbcType="VARCHAR" />
+        <result column="operation_info" property="operationInfo" jdbcType="VARCHAR" />
+        <result column="operation_opuserid" property="operationOpuserid" jdbcType="INTEGER" />
+        <result column="operation_deletetype" property="operationDeletetype" jdbcType="VARCHAR" />
+        <result column="operation_foundtime" property="operationFoundtime" jdbcType="TIMESTAMP" />
+        <result column="operation_updatetime" property="operationUpdatetime" jdbcType="TIMESTAMP" />
+        <result column="operation_back" property="operationBack" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        operation_id,operation_name,operation_grade,operation_number
+    </sql>
+
+    <insert id="insert" parameterType="com.cmpay.sachzhong.entity.OperationDO" >
+        insert into sachzhong_operation
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="operationId != null" >
+                operation_id,
+            </if>
+            <if test="operationName != null" >
+                operation_name,
+            </if>
+            <if test="operationGrade != null" >
+                operation_grade,
+            </if>
+            <if test="operationNumber != null" >
+                operation_number,
+            </if>
+            <if test="operationType != null" >
+                operation_type,
+            </if>
+            <if test="operationInfo != null" >
+                operation_info,
+            </if>
+            <if test="operationOpuserid != null" >
+                operation_opuserid,
+            </if>
+            <if test="operationDeletetype != null" >
+                operation_deletetype,
+            </if>
+            <if test="operationFoundtime != null" >
+                operation_foundtime,
+            </if>
+            <if test="operationUpdatetime != null" >
+                operation_updatetime,
+            </if>
+            <if test="operationBack != null" >
+                operation_back,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="operationId != null" >
+                #{operationId,jdbcType=INTEGER},
+            </if>
+            <if test="operationName != null" >
+                #{operationName,jdbcType=VARCHAR},
+            </if>
+            <if test="operationGrade != null" >
+                #{operationGrade,jdbcType=INTEGER},
+            </if>
+            <if test="operationNumber != null" >
+                #{operationNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="operationType != null" >
+                #{operationType,jdbcType=VARCHAR},
+            </if>
+            <if test="operationInfo != null" >
+                #{operationInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="operationOpuserid != null" >
+                #{operationOpuserid,jdbcType=INTEGER},
+            </if>
+            <if test="operationDeletetype != null" >
+                #{operationDeletetype,jdbcType=VARCHAR},
+            </if>
+            <if test="operationFoundtime != null" >
+                #{operationFoundtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operationUpdatetime != null" >
+                #{operationUpdatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operationBack != null" >
+                #{operationBack,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="find" resultMap="BaseResultMap" parameterType="com.cmpay.sachzhong.entity.OperationDO" >
+        select 
+        <include refid="Base_Column_List" />
+        from sachzhong_operation
+        <where >
+            <if test="operationId != null" >
+                and operation_id = #{operationId,jdbcType=INTEGER}
+            </if>
+            <if test="operationName != null" >
+                and operation_name = #{operationName,jdbcType=VARCHAR}
+            </if>
+            <if test="operationGrade != null" >
+                and operation_grade = #{operationGrade,jdbcType=INTEGER}
+            </if>
+            <if test="operationNumber != null" >
+                and operation_number = #{operationNumber,jdbcType=VARCHAR}
+            </if>
+            <if test="operationType != null" >
+                and operation_type = #{operationType,jdbcType=VARCHAR}
+            </if>
+            <if test="operationInfo != null" >
+                and operation_info = #{operationInfo,jdbcType=VARCHAR}
+            </if>
+            <if test="operationOpuserid != null" >
+                and operation_opuserid = #{operationOpuserid,jdbcType=INTEGER}
+            </if>
+            <if test="operationDeletetype != null" >
+                and operation_deletetype = #{operationDeletetype,jdbcType=VARCHAR}
+            </if>
+            <if test="operationFoundtime != null" >
+                and operation_foundtime = #{operationFoundtime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="operationUpdatetime != null" >
+                and operation_updatetime = #{operationUpdatetime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="operationBack != null" >
+                and operation_back = #{operationBack,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>

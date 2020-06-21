@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmpay.sachzhong.dao.IUserDao" >
+
+    <resultMap id="BaseResultMap" type="com.cmpay.sachzhong.entity.UserDO" >
+        <result column="userid" property="userid" jdbcType="INTEGER" />
+        <result column="usersex" property="usersex" jdbcType="VARCHAR" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="userimg" property="userimg" jdbcType="VARCHAR" />
+        <result column="userage" property="userage" jdbcType="VARCHAR" />
+        <result column="useridcard" property="useridcard" jdbcType="VARCHAR" />
+        <result column="useridcardname" property="useridcardname" jdbcType="VARCHAR" />
+        <result column="userphone" property="userphone" jdbcType="VARCHAR" />
+        <result column="usermail" property="usermail" jdbcType="VARCHAR" />
+        <result column="usertype" property="usertype" jdbcType="VARCHAR" />
+        <result column="userpassword" property="userpassword" jdbcType="VARCHAR" />
+        <result column="useraddress" property="useraddress" jdbcType="VARCHAR" />
+        <result column="userdeletetype" property="userdeletetype" jdbcType="VARCHAR" />
+        <result column="userlogintype" property="userlogintype" jdbcType="VARCHAR" />
+        <result column="userip" property="userip" jdbcType="VARCHAR" />
+        <result column="userdeletetime" property="userdeletetime" jdbcType="TIMESTAMP" />
+        <result column="userregtime" property="userregtime" jdbcType="TIMESTAMP" />
+        <result column="userlogintime" property="userlogintime" jdbcType="TIMESTAMP" />
+        <result column="userupdatetime" property="userupdatetime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.cmpay.sachzhong.entity.UserDO" >
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="userid != null" >
+                userid,
+            </if>
+            <if test="usersex != null" >
+                usersex,
+            </if>
+            <if test="username != null" >
+                username,
+            </if>
+            <if test="userimg != null" >
+                userimg,
+            </if>
+            <if test="userage != null" >
+                userage,
+            </if>
+            <if test="useridcard != null" >
+                useridcard,
+            </if>
+            <if test="useridcardname != null" >
+                useridcardname,
+            </if>
+            <if test="userphone != null" >
+                userphone,
+            </if>
+            <if test="usermail != null" >
+                usermail,
+            </if>
+            <if test="usertype != null" >
+                usertype,
+            </if>
+            <if test="userpassword != null" >
+                userpassword,
+            </if>
+            <if test="useraddress != null" >
+                useraddress,
+            </if>
+            <if test="userdeletetype != null" >
+                userdeletetype,
+            </if>
+            <if test="userlogintype != null" >
+                userlogintype,
+            </if>
+            <if test="userip != null" >
+                userip,
+            </if>
+            <if test="userdeletetime != null" >
+                userdeletetime,
+            </if>
+            <if test="userregtime != null" >
+                userregtime,
+            </if>
+            <if test="userlogintime != null" >
+                userlogintime,
+            </if>
+            <if test="userupdatetime != null" >
+                userupdatetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userid != null" >
+                #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="usersex != null" >
+                #{usersex,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null" >
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="userimg != null" >
+                #{userimg,jdbcType=VARCHAR},
+            </if>
+            <if test="userage != null" >
+                #{userage,jdbcType=VARCHAR},
+            </if>
+            <if test="useridcard != null" >
+                #{useridcard,jdbcType=VARCHAR},
+            </if>
+            <if test="useridcardname != null" >
+                #{useridcardname,jdbcType=VARCHAR},
+            </if>
+            <if test="userphone != null" >
+                #{userphone,jdbcType=VARCHAR},
+            </if>
+            <if test="usermail != null" >
+                #{usermail,jdbcType=VARCHAR},
+            </if>
+            <if test="usertype != null" >
+                #{usertype,jdbcType=VARCHAR},
+            </if>
+            <if test="userpassword != null" >
+                #{userpassword,jdbcType=VARCHAR},
+            </if>
+            <if test="useraddress != null" >
+                #{useraddress,jdbcType=VARCHAR},
+            </if>
+            <if test="userdeletetype != null" >
+                #{userdeletetype,jdbcType=VARCHAR},
+            </if>
+            <if test="userlogintype != null" >
+                #{userlogintype,jdbcType=VARCHAR},
+            </if>
+            <if test="userip != null" >
+                #{userip,jdbcType=VARCHAR},
+            </if>
+            <if test="userdeletetime != null" >
+                #{userdeletetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userregtime != null" >
+                #{userregtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userlogintime != null" >
+                #{userlogintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userupdatetime != null" >
+                #{userupdatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="find" resultMap="BaseResultMap" parameterType="com.cmpay.sachzhong.entity.UserDO" >
+        select 
+        <include refid="Base_Column_List" />
+        from user
+        <where >
+            <if test="userid != null" >
+                and userid = #{userid,jdbcType=INTEGER}
+            </if>
+            <if test="usersex != null" >
+                and usersex = #{usersex,jdbcType=VARCHAR}
+            </if>
+            <if test="username != null" >
+                and username = #{username,jdbcType=VARCHAR}
+            </if>
+            <if test="userimg != null" >
+                and userimg = #{userimg,jdbcType=VARCHAR}
+            </if>
+            <if test="userage != null" >
+                and userage = #{userage,jdbcType=VARCHAR}
+            </if>
+            <if test="useridcard != null" >
+                and useridcard = #{useridcard,jdbcType=VARCHAR}
+            </if>
+            <if test="useridcardname != null" >
+                and useridcardname = #{useridcardname,jdbcType=VARCHAR}
+            </if>
+            <if test="userphone != null" >
+                and userphone = #{userphone,jdbcType=VARCHAR}
+            </if>
+            <if test="usermail != null" >
+                and usermail = #{usermail,jdbcType=VARCHAR}
+            </if>
+            <if test="usertype != null" >
+                and usertype = #{usertype,jdbcType=VARCHAR}
+            </if>
+            <if test="userpassword != null" >
+                and userpassword = #{userpassword,jdbcType=VARCHAR}
+            </if>
+            <if test="useraddress != null" >
+                and useraddress = #{useraddress,jdbcType=VARCHAR}
+            </if>
+            <if test="userdeletetype != null" >
+                and userdeletetype = #{userdeletetype,jdbcType=VARCHAR}
+            </if>
+            <if test="userlogintype != null" >
+                and userlogintype = #{userlogintype,jdbcType=VARCHAR}
+            </if>
+            <if test="userip != null" >
+                and userip = #{userip,jdbcType=VARCHAR}
+            </if>
+            <if test="userdeletetime != null" >
+                and userdeletetime = #{userdeletetime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="userregtime != null" >
+                and userregtime = #{userregtime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="userlogintime != null" >
+                and userlogintime = #{userlogintime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="userupdatetime != null" >
+                and userupdatetime = #{userupdatetime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+</mapper>

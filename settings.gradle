@@ -1,0 +1,21 @@
+pluginManagement {
+    repositories {
+        maven {
+            url {'http://172.16.50.223:8081/repository/maven-public/'}
+        }
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'SachZhong-User'
+include 'app'
+include 'app:app-user'
+include 'constant'
+include 'constant:user-constant'
+include 'common'
+include 'common:user-auth'
+include 'interface'
+include 'interface:user-manager-interface'
+include 'service'
+include 'service:user-service'
+

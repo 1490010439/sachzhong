@@ -1,0 +1,18 @@
+repositories {
+    maven {
+        url {'http://172.16.50.223:8081/repository/maven-public/'}
+    }
+}
+
+
+dependencies {
+    compile("com.cmpay:lemon-framework-starter-datasource:2.0.1-SNAPSHOT")
+    compile("com.cmpay:lemon-framework-starter-mybatis:2.0.1-SNAPSHOT")
+    compile("com.cmpay:lemon-framework-starter-idgen:2.0.1-SNAPSHOT")
+    compile("com.cmpay:lemon-framework-context:2.0.1-SNAPSHOT"){
+        exclude group: 'com.cmpay', module: 'lemon-framework-schedule'
+    }
+
+    compile("org.apache.shiro:shiro-core:1.4.0")
+    compile("mysql:mysql-connector-java:6.0.6")
+}

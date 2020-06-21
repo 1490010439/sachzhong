@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmpay.sachzhong.dao.IUserByRoleDao" >
+
+    <resultMap id="BaseResultMap" type="com.cmpay.sachzhong.entity.UserByRoleDO" >
+        <result column="userbyrole_id" property="userbyroleId" jdbcType="INTEGER" />
+        <result column="userbyrole_userid" property="userbyroleUserid" jdbcType="INTEGER" />
+        <result column="userbyrole_roleid" property="userbyroleRoleid" jdbcType="INTEGER" />
+        <result column="userbyrole_back" property="userbyroleBack" jdbcType="VARCHAR" />
+        <result column="userbyrole_opuserid" property="userbyroleOpuserid" jdbcType="INTEGER" />
+        <result column="userbyrole_deletetype" property="userbyroleDeletetype" jdbcType="VARCHAR" />
+        <result column="userbyrole_foundtime" property="userbyroleFoundtime" jdbcType="TIMESTAMP" />
+        <result column="userbyrole_updatetime" property="userbyroleUpdatetime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        userbyrole_id,userbyrole_userid,userbyrole_roleid,userbyrole_opuserid
+    </sql>
+
+    <insert id="insert" parameterType="com.cmpay.sachzhong.entity.UserByRoleDO" >
+        insert into sachzhong_userbyrole
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="userbyroleId != null" >
+                userbyrole_id,
+            </if>
+            <if test="userbyroleUserid != null" >
+                userbyrole_userid,
+            </if>
+            <if test="userbyroleRoleid != null" >
+                userbyrole_roleid,
+            </if>
+            <if test="userbyroleBack != null" >
+                userbyrole_back,
+            </if>
+            <if test="userbyroleOpuserid != null" >
+                userbyrole_opuserid,
+            </if>
+            <if test="userbyroleDeletetype != null" >
+                userbyrole_deletetype,
+            </if>
+            <if test="userbyroleFoundtime != null" >
+                userbyrole_foundtime,
+            </if>
+            <if test="userbyroleUpdatetime != null" >
+                userbyrole_updatetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userbyroleId != null" >
+                #{userbyroleId,jdbcType=INTEGER},
+            </if>
+            <if test="userbyroleUserid != null" >
+                #{userbyroleUserid,jdbcType=INTEGER},
+            </if>
+            <if test="userbyroleRoleid != null" >
+                #{userbyroleRoleid,jdbcType=INTEGER},
+            </if>
+            <if test="userbyroleBack != null" >
+                #{userbyroleBack,jdbcType=VARCHAR},
+            </if>
+            <if test="userbyroleOpuserid != null" >
+                #{userbyroleOpuserid,jdbcType=INTEGER},
+            </if>
+            <if test="userbyroleDeletetype != null" >
+                #{userbyroleDeletetype,jdbcType=VARCHAR},
+            </if>
+            <if test="userbyroleFoundtime != null" >
+                #{userbyroleFoundtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userbyroleUpdatetime != null" >
+                #{userbyroleUpdatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="find" resultMap="BaseResultMap" parameterType="com.cmpay.sachzhong.entity.UserByRoleDO" >
+        select 
+        <include refid="Base_Column_List" />
+        from sachzhong_userbyrole
+        <where >
+            <if test="userbyroleId != null" >
+                and userbyrole_id = #{userbyroleId,jdbcType=INTEGER}
+            </if>
+            <if test="userbyroleUserid != null" >
+                and userbyrole_userid = #{userbyroleUserid,jdbcType=INTEGER}
+            </if>
+            <if test="userbyroleRoleid != null" >
+                and userbyrole_roleid = #{userbyroleRoleid,jdbcType=INTEGER}
+            </if>
+            <if test="userbyroleBack != null" >
+                and userbyrole_back = #{userbyroleBack,jdbcType=VARCHAR}
+            </if>
+            <if test="userbyroleOpuserid != null" >
+                and userbyrole_opuserid = #{userbyroleOpuserid,jdbcType=INTEGER}
+            </if>
+            <if test="userbyroleDeletetype != null" >
+                and userbyrole_deletetype = #{userbyroleDeletetype,jdbcType=VARCHAR}
+            </if>
+            <if test="userbyroleFoundtime != null" >
+                and userbyrole_foundtime = #{userbyroleFoundtime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="userbyroleUpdatetime != null" >
+                and userbyrole_updatetime = #{userbyroleUpdatetime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+</mapper>
