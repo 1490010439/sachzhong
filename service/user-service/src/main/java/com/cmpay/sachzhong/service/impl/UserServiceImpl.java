@@ -4,6 +4,7 @@ import com.cmpay.sachzhong.dao.IUserDao;
 import com.cmpay.sachzhong.entity.UserDO;
 import com.cmpay.sachzhong.entity.UserDOKey;
 import com.cmpay.sachzhong.service.UserService;
+import com.cmpay.sachzhong.utils.SqlValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +52,13 @@ public class UserServiceImpl implements UserService {
         userDOKey.setUserId(id);
 
         return iUserDao.delete(userDOKey);
+    }
+
+    @Override
+    public UserDO getById(int id) {
+
+        SqlValue sqlValue=new SqlValue();
+        sqlValue.setIntValue(id);
+        return iUserDao.getById(sqlValue);
     }
 }

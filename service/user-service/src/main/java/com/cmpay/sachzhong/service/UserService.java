@@ -46,4 +46,12 @@ public interface UserService {
      * @return
      */
     int delete(int id);
+
+    /**
+     * 根据ID查找
+     * @param id
+     * @return
+     */
+    UserDO getById(int id);
+
 }

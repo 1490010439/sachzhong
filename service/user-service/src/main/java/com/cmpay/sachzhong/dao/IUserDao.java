@@ -9,8 +9,12 @@ package com.cmpay.sachzhong.dao;
 import com.cmpay.lemon.framework.dao.BaseDao;
 import com.cmpay.sachzhong.entity.UserDO;
 import com.cmpay.sachzhong.entity.UserDOKey;
+import com.cmpay.sachzhong.utils.SqlValue;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface IUserDao extends BaseDao<UserDO, UserDOKey> {
+
+    UserDO getById(SqlValue sqlValue);
+
 }

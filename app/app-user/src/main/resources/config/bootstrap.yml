@@ -97,6 +97,7 @@ lemon:
       permitAll:
         - /upms/v1/captcha/getCaptcha
         - /sachzhong/user/test
+        - /sachzhong/user/getById
   #Multiple dataSources
   dataSources:
     primary:
