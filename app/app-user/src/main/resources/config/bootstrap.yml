@@ -95,11 +95,12 @@ lemon:
     authorizeRequests:
       #配置不进行认证检查的交易请求url
       permitAll:
+        - /sachzhong/**
         - /upms/v1/captcha/getCaptcha
-        - /sachzhong/user/test
-        - /sachzhong/user/getById
-        - /sachzhong/user/getPage
-        - /sachzhong/user/find
+#        - /sachzhong/user/test
+#        - /sachzhong/user/getById
+#        - /sachzhong/user/getPage
+#        - /sachzhong/user/find
   #Multiple dataSources
   dataSources:
     primary:
