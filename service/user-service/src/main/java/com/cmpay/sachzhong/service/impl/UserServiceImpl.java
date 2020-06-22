@@ -1,10 +1,12 @@
 package com.cmpay.sachzhong.service.impl;
 
+import com.cmpay.lemon.framework.utils.PageUtils;
 import com.cmpay.sachzhong.dao.IUserDao;
 import com.cmpay.sachzhong.entity.UserDO;
 import com.cmpay.sachzhong.entity.UserDOKey;
 import com.cmpay.sachzhong.service.UserService;
 import com.cmpay.sachzhong.utils.SqlValue;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,4 +63,21 @@ public class UserServiceImpl implements UserService {
         sqlValue.setIntValue(id);
         return iUserDao.getById(sqlValue);
     }
+
+    @Override
+    public PageInfo<UserDO> getPage(int pageNum, int pageSize, UserDO userDO) {
+
+        PageInfo<UserDO> pageInfo = null;
+        if (pageNum == 0 || pageSize == 0){
+
+            pageInfo =new PageInfo<UserDO>(iUserDao.find(userDO));
+        }
+        else {
+            pageInfo = PageUtils.pageQueryWithCount(pageNum,pageSize,()-> iUserDao.find(userDO));
+        }
+
+        return pageInfo;
+    }
+
+
 }
