@@ -5,9 +5,10 @@ import com.cmpay.sachzhong.entity.MenuDO;
 import com.cmpay.sachzhong.entity.MenuDOKey;
 import com.cmpay.sachzhong.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class MenuServiceImpl implements MenuService {
 
     @Autowired

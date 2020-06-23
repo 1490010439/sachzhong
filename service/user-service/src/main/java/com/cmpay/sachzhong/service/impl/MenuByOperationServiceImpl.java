@@ -5,6 +5,7 @@ import com.cmpay.sachzhong.entity.MenuByOperationDO;
 import com.cmpay.sachzhong.entity.MenuByOperationDOKey;
 import com.cmpay.sachzhong.service.MenuByOperationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * @author SachZhong 钟盛勤
  * @date 2020/6/21 16:23
  */
+@Service
 public class MenuByOperationServiceImpl implements MenuByOperationService {
 
     @Autowired

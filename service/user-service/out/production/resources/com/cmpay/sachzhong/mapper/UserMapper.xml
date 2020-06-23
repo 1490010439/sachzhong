@@ -25,9 +25,93 @@
         <result column="user_updatetime" property="userUpdatetime" jdbcType="TIMESTAMP" />
     </resultMap>
 
-    <sql id="Base_Column_List">
-        user_id,user_name
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
     </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        user_id, user_money, user_sex, user_name, user_img, user_age, user_idcard, user_idcardname, 
+        user_phone, user_mail, user_type, user_password, user_address, user_deletetype, user_logintype, 
+        user_loginip, user_deletetime, user_regtime, user_logintime, user_updatetime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cmpay.sachzhong.entity.UserDOExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from sachzhong_user
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <delete id="deleteByExample" parameterType="com.cmpay.sachzhong.entity.UserDOExample" >
+        delete from sachzhong_user
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
 
     <insert id="insert" parameterType="com.cmpay.sachzhong.entity.UserDO" >
         insert into sachzhong_user
@@ -157,6 +241,109 @@
         </trim>
     </insert>
 
+    <select id="countByExample" parameterType="com.cmpay.sachzhong.entity.UserDOExample" resultType="java.lang.Integer" >
+        select count(*) from sachzhong_user
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update sachzhong_user
+        <set >
+            <if test="record.userId != null" >
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.userMoney != null" >
+                user_money = #{record.userMoney,jdbcType=REAL},
+            </if>
+            <if test="record.userSex != null" >
+                user_sex = #{record.userSex,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userName != null" >
+                user_name = #{record.userName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userImg != null" >
+                user_img = #{record.userImg,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userAge != null" >
+                user_age = #{record.userAge,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userIdcard != null" >
+                user_idcard = #{record.userIdcard,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userIdcardname != null" >
+                user_idcardname = #{record.userIdcardname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userPhone != null" >
+                user_phone = #{record.userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userMail != null" >
+                user_mail = #{record.userMail,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userType != null" >
+                user_type = #{record.userType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userPassword != null" >
+                user_password = #{record.userPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userAddress != null" >
+                user_address = #{record.userAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userDeletetype != null" >
+                user_deletetype = #{record.userDeletetype,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userLogintype != null" >
+                user_logintype = #{record.userLogintype,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userLoginip != null" >
+                user_loginip = #{record.userLoginip,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userDeletetime != null" >
+                user_deletetime = #{record.userDeletetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.userRegtime != null" >
+                user_regtime = #{record.userRegtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.userLogintime != null" >
+                user_logintime = #{record.userLogintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.userUpdatetime != null" >
+                user_updatetime = #{record.userUpdatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update sachzhong_user
+        set user_id = #{record.userId,jdbcType=INTEGER},
+            user_money = #{record.userMoney,jdbcType=REAL},
+            user_sex = #{record.userSex,jdbcType=VARCHAR},
+            user_name = #{record.userName,jdbcType=VARCHAR},
+            user_img = #{record.userImg,jdbcType=VARCHAR},
+            user_age = #{record.userAge,jdbcType=VARCHAR},
+            user_idcard = #{record.userIdcard,jdbcType=VARCHAR},
+            user_idcardname = #{record.userIdcardname,jdbcType=VARCHAR},
+            user_phone = #{record.userPhone,jdbcType=VARCHAR},
+            user_mail = #{record.userMail,jdbcType=VARCHAR},
+            user_type = #{record.userType,jdbcType=VARCHAR},
+            user_password = #{record.userPassword,jdbcType=VARCHAR},
+            user_address = #{record.userAddress,jdbcType=VARCHAR},
+            user_deletetype = #{record.userDeletetype,jdbcType=VARCHAR},
+            user_logintype = #{record.userLogintype,jdbcType=VARCHAR},
+            user_loginip = #{record.userLoginip,jdbcType=VARCHAR},
+            user_deletetime = #{record.userDeletetime,jdbcType=TIMESTAMP},
+            user_regtime = #{record.userRegtime,jdbcType=TIMESTAMP},
+            user_logintime = #{record.userLogintime,jdbcType=TIMESTAMP},
+            user_updatetime = #{record.userUpdatetime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
     <select id="find" resultMap="BaseResultMap" parameterType="com.cmpay.sachzhong.entity.UserDO" >
         select 
         <include refid="Base_Column_List" />
@@ -225,4 +412,51 @@
         </where>
     </select>
 
+
+    <select id="getById" parameterType="com.cmpay.sachzhong.utils.SqlValue"
+            resultMap="BaseResultMap">
+        SELECT * FROM sachzhong_user where user_id =  ${IntValue}
+    </select>
+
+    <select id="selectByBetween" parameterType="com.cmpay.sachzhong.utils.SqlValue"
+            resultMap="BaseResultMap">
+        SELECT * FROM user where  ${mynode} between #{betweenStart,jdbcType=INTEGER} and #{betweenEnd,jdbcType=INTEGER} order by ${mynodeby}  ${DESCorASC}
+    </select>
+
+    <select id="selectUserLikeName" parameterType="com.cmpay.sachzhong.utils.SqlValue"
+            resultMap="BaseResultMap">
+        SELECT * FROM user where username like ${mynode}
+    </select>
+
+    <select id="selectUserPage" parameterType="com.cmpay.sachzhong.utils.SqlValue"
+            resultMap="BaseResultMap">
+        SELECT * FROM user WHERE userdeletetype=#{mynode} ORDER BY userid DESC LIMIT #{betweenStart,jdbcType=INTEGER},#{betweenEnd,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectUserCount" parameterType="com.cmpay.sachzhong.utils.SqlValue"
+            resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM user WHERE userdeletetype=#{mynode}
+    </select>
+
+    <update id="deleteUser" parameterType="com.cmpay.sachzhong.utils.SqlValue">
+
+        update user set userdeletetype='true' where userid=#{IntValue}
+
+    </update>
+
+    <update id="updateUserMoney" parameterType="com.cmpay.sachzhong.utils.SqlValue">
+
+        UPDATE user set usermoney=${floatNode}  where  userid=${IntValue} ;
+
+    </update>
+
+    <select id="selectLike" parameterType="com.cmpay.sachzhong.utils.SqlValue"
+            resultMap="BaseResultMap">
+        SELECT * FROM user where username like  ${mynode} or userphone like  ${mynode} or useridcardname like  ${mynode}
+    </select>
+
+    <select id="selectFriend" parameterType="com.cmpay.sachzhong.utils.SqlValue"
+            resultMap="BaseResultMap">
+        SELECT u.* FROM user as u INNER JOIN friend as f ON u.userid=f.userfriendid where f.userid=${IntValue}
+    </select>
 </mapper>

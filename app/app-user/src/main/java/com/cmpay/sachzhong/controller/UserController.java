@@ -1,6 +1,5 @@
 package com.cmpay.sachzhong.controller;
 
-import com.cmpay.lemon.common.utils.BeanUtils;
 import com.cmpay.lemon.framework.annotation.QueryBody;
 import com.cmpay.lemon.framework.data.DefaultRspDTO;
 import com.cmpay.sachzhong.dto.UserRspDTO;
@@ -34,18 +33,25 @@ public class UserController {
         return DefaultRspDTO.newSuccessInstance(reqDTO);
     }
 
+    /**
+     * 查询用户信息 根据ID
+     */
+    @GetMapping("/getAll")
+    public DefaultRspDTO<List<UserDO>> getAll()
+    {
+        List<UserDO> list = userService.selectUserList();
+        return DefaultRspDTO.newSuccessInstance(list);
+    }
 
 
     /**
      * 查询用户信息 根据ID
      */
     @GetMapping("/getById")
-    public DefaultRspDTO<UserRspDTO> getById(@QueryBody int id)
+    public DefaultRspDTO<List<UserDO>> getById(@QueryBody int id)
     {
-        UserDO userDO = userService.getById(id);
-        UserRspDTO userRspDTO=new UserRspDTO();
-        BeanUtils.copyProperties(userRspDTO, userDO);
-        return DefaultRspDTO.newSuccessInstance(userRspDTO);
+        List<UserDO> list = userService.getById(id);
+        return DefaultRspDTO.newSuccessInstance(list);
     }
 
     /**
@@ -70,6 +76,7 @@ public class UserController {
 
         return DefaultRspDTO.newSuccessInstance(pageInfo);
     }
+
 
     /**
      * 更新用户信息

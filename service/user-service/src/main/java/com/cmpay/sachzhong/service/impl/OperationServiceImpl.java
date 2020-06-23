@@ -5,9 +5,10 @@ import com.cmpay.sachzhong.entity.OperationDO;
 import com.cmpay.sachzhong.entity.OperationDOKey;
 import com.cmpay.sachzhong.service.OperationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class OperationServiceImpl implements OperationService {
 
     @Autowired

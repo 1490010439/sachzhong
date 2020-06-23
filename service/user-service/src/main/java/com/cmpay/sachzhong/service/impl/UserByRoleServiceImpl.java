@@ -5,6 +5,7 @@ import com.cmpay.sachzhong.entity.UserByRoleDO;
 import com.cmpay.sachzhong.entity.UserByRoleDOKey;
 import com.cmpay.sachzhong.service.UserByRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * @author SachZhong 钟盛勤
  * @date 2020/6/20 14:41
  */
+@Service
 public class UserByRoleServiceImpl implements UserByRoleService {
 
     @Autowired

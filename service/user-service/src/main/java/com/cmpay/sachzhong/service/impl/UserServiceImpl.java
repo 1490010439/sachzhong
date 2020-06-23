@@ -3,6 +3,7 @@ package com.cmpay.sachzhong.service.impl;
 import com.cmpay.lemon.framework.utils.PageUtils;
 import com.cmpay.sachzhong.dao.IUserDao;
 import com.cmpay.sachzhong.entity.UserDO;
+import com.cmpay.sachzhong.entity.UserDOExample;
 import com.cmpay.sachzhong.entity.UserDOKey;
 import com.cmpay.sachzhong.service.UserService;
 import com.cmpay.sachzhong.utils.SqlValue;
@@ -57,11 +58,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDO getById(int id) {
-
-        SqlValue sqlValue=new SqlValue();
-        sqlValue.setIntValue(id);
-        return iUserDao.getById(sqlValue);
+    public List<UserDO> getById(int id) {
+         UserDOExample userDOExample=new UserDOExample();
+         UserDOExample.Criteria criteria = userDOExample.createCriteria();
+         criteria.andUserIdEqualTo(id);
+    return iUserDao.selectByExample(userDOExample);
     }
 
     @Override
@@ -78,6 +79,130 @@ public class UserServiceImpl implements UserService {
 
         return pageInfo;
     }
+
+    @Override
+    public List<UserDO> selectUserList() {
+
+        UserDOExample UserDOExample=new UserDOExample();
+        List<UserDO> mylist=iUserDao.selectByExample(UserDOExample);
+        return mylist;
+    }
+
+    @Override
+    public List<UserDO> login(String phone, String password) {
+
+        //设置查询语句
+        UserDOExample UserDOExample=new UserDOExample();
+        UserDOExample.Criteria criteria = UserDOExample.createCriteria();
+        criteria.andUserPhoneEqualTo(phone);
+        criteria.andUserPasswordEqualTo(password);
+        List<UserDO> mylist=iUserDao.selectByExample(UserDOExample);
+
+        return mylist;
+
+    }
+
+    @Override
+    public List<UserDO> selectPhone(String phone) {
+
+        //设置查询语句
+        UserDOExample UserDOExample=new UserDOExample();
+        UserDOExample.Criteria criteria = UserDOExample.createCriteria();
+        criteria.andUserPhoneEqualTo(phone);
+
+        return iUserDao.selectByExample(UserDOExample);
+
+    }
+
+    @Override
+    public List<UserDO> selectByBetween(String mynode, int betweenstart, int betweenend, String mynodeby, String DESCorASC) {
+        //select * from user where userid between 1 and 2 order by usertype  DESC
+        SqlValue mysql =new SqlValue(mynode,betweenstart,betweenend,mynodeby,DESCorASC);
+        return iUserDao.selectByBetween(mysql);
+    }
+
+
+
+    @Override
+    public int reg(UserDO user) {
+        return iUserDao.insert(user);
+    }
+
+
+    @Override
+    public List<UserDO> selectUserName(String username) {
+        //设置查询语句
+        UserDOExample UserDOExample=new UserDOExample();
+        UserDOExample.Criteria criteria = UserDOExample.createCriteria();
+        criteria.andUserNameEqualTo(username);
+        return iUserDao.selectByExample(UserDOExample);
+    }
+
+    @Override
+    public List<UserDO> selectUserLikeName(String username) {
+
+        SqlValue sqlValue=new SqlValue();
+        sqlValue.setMynode("'%"+username+"%'");
+        return iUserDao.selectUserLikeName(sqlValue);
+    }
+
+    @Override
+    public List<UserDO> selectUsermail(String usermail) {
+        //设置查询语句
+        UserDOExample UserDOExample=new UserDOExample();
+        UserDOExample.Criteria criteria = UserDOExample.createCriteria();
+        criteria.andUserMailEqualTo(usermail);
+        return iUserDao.selectByExample(UserDOExample);
+    }
+
+    @Override
+    public List<UserDO> selectUserPage(String userdeletetype,int page, int size){
+
+        //如果每页的大小小于1,赋值1
+        if(size<=0)
+        {
+            size=1;
+        }
+
+        //进行分页，分页从第一页开始
+        page=(page-1)*size;
+
+        //如果分页输错，小于0了,赋值0，也就是第一页开始
+        if(page<=0)
+        {
+            page=0;
+        }
+
+        SqlValue sqlValue=new SqlValue();
+        sqlValue.setMynode(userdeletetype);
+        sqlValue.setBetweenStart(page);
+        sqlValue.setBetweenEnd(size);
+        return iUserDao.selectUserPage(sqlValue);
+    }
+
+    @Override
+    public int selectUserCount(String userdeletetype) {
+        SqlValue sqlValue=new SqlValue();
+        sqlValue.setMynode(userdeletetype);
+        return iUserDao.selectUserCount(sqlValue);
+    }
+
+
+    @Override
+    public int updateUserMoney(float money, int id) {
+        SqlValue sqlValue=new SqlValue();
+        sqlValue.setFloatNode(money);
+        sqlValue.setIntValue(id);
+        return iUserDao.updateUserMoney(sqlValue);
+    }
+
+    @Override
+    public List<UserDO> selectLike(String value) {
+        SqlValue sqlValue=new SqlValue();
+        sqlValue.setMynode("'%"+value+"%'");
+        return iUserDao.selectLike(sqlValue);
+    }
+
 
 
 }

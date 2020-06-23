@@ -45,23 +45,20 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <table tableName="sachzhong_menu" domainObjectName="MenuDO" enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+
+        <table tableName="sachzhong_user" domainObjectName="UserDO">
         </table>
-        <table tableName="sachzhong_menubyoperation" domainObjectName="MenuByOperationDO" enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        <table tableName="sachzhong_menu" domainObjectName="MenuDO">
         </table>
-        <table tableName="sachzhong_operation" domainObjectName="OperationDO" enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        <table tableName="sachzhong_menubyoperation" domainObjectName="MenuByOperationDO">
         </table>
-        <table tableName="sachzhong_role" domainObjectName="RoleDO" enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        <table tableName="sachzhong_operation" domainObjectName="OperationDO">
         </table>
-        <table tableName="sachzhong_rolebymenu" domainObjectName="RoleByMenuDO" enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        <table tableName="sachzhong_role" domainObjectName="RoleDO">
         </table>
-        <table tableName="sachzhong_userbyrole" domainObjectName="UserByRoleDO" enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        <table tableName="sachzhong_rolebymenu" domainObjectName="RoleByMenuDO">
+        </table>
+        <table tableName="sachzhong_userbyrole" domainObjectName="UserByRoleDO">
         </table>
     </context>
 </generatorConfiguration>
