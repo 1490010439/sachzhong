@@ -2,6 +2,7 @@ package com.cmpay.sachzhong.service.impl;
 
 import com.cmpay.sachzhong.dao.IRoleDao;
 import com.cmpay.sachzhong.entity.RoleDO;
+import com.cmpay.sachzhong.entity.RoleDOExample;
 import com.cmpay.sachzhong.entity.RoleDOKey;
 import com.cmpay.sachzhong.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,21 @@ public class RoleServiceImpl implements RoleService {
         RoleDOKey roleDOKey=new RoleDOKey();
         roleDOKey.setRoleId(id);
         return iRoleDao.delete(roleDOKey);
+    }
+
+    @Override
+    public List<RoleDO> getById(int id) {
+        RoleDOExample roleDOExample =new RoleDOExample();
+        RoleDOExample.Criteria criteria =roleDOExample.createCriteria();
+        criteria.andRoleIdEqualTo(id);
+        return iRoleDao.selectByExample(roleDOExample);
+    }
+
+    @Override
+    public List<RoleDO> getByRoleNumber(String roleNumber) {
+        RoleDOExample roleDOExample =new RoleDOExample();
+        RoleDOExample.Criteria criteria =roleDOExample.createCriteria();
+        criteria.andRoleNumberEqualTo(roleNumber);
+        return iRoleDao.selectByExample(roleDOExample);
     }
 }

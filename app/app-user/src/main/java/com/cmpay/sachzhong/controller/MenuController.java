@@ -1,9 +1,7 @@
 package com.cmpay.sachzhong.controller;
 
-import com.cmpay.lemon.common.utils.BeanUtils;
 import com.cmpay.lemon.framework.annotation.QueryBody;
 import com.cmpay.lemon.framework.data.DefaultRspDTO;
-import com.cmpay.sachzhong.dto.MenuRspDTO;
 import com.cmpay.sachzhong.entity.MenuDO;
 import com.cmpay.sachzhong.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +27,10 @@ public class MenuController {
      * 查询信息 根据ID
      */
     @GetMapping("/getById")
-    public DefaultRspDTO<MenuRspDTO> getById(@QueryBody int id)
+    public DefaultRspDTO< List<MenuDO>> getById(@QueryBody int id)
     {
-        MenuDO menuDO = menuService.get(id);
-        MenuRspDTO menuRspDTO=new MenuRspDTO();
-        BeanUtils.copyProperties(menuRspDTO, menuDO);
-        return DefaultRspDTO.newSuccessInstance(menuRspDTO);
+        List<MenuDO> list = menuService.getById(id);
+        return DefaultRspDTO.newSuccessInstance(list);
     }
 
     /**
@@ -47,7 +43,6 @@ public class MenuController {
 
         return DefaultRspDTO.newSuccessInstance(list);
     }
-
 
 
     /**
@@ -82,6 +77,18 @@ public class MenuController {
         int result = menuService.delete(id);
 
         return DefaultRspDTO.newSuccessInstance(result);
+    }
+
+
+
+    /**
+     * 根据 menuNumber 菜单编号 查找
+     */
+    @GetMapping("/getByMenuNumber")
+    public DefaultRspDTO<List<MenuDO>> getByMenuNumber(String menuNumber)
+    {
+        List<MenuDO> list = menuService.getByMenuNumber(menuNumber);
+        return DefaultRspDTO.newSuccessInstance(list);
     }
 
 

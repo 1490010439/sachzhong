@@ -46,4 +46,20 @@ public interface RoleService {
      */
     int delete(int id);
 
+
+
+    /**
+     * 根据ID查找
+     * @param id
+     * @return
+     */
+    List<RoleDO> getById(int id);
+
+    /**
+     * 根据 roleNumber 操作编号 查找
+     * @param roleNumber
+     * @return
+     */
+    List<RoleDO> getByRoleNumber(String roleNumber);
+
 }

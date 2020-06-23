@@ -2,6 +2,7 @@ package com.cmpay.sachzhong.service.impl;
 
 import com.cmpay.sachzhong.dao.IUserByRoleDao;
 import com.cmpay.sachzhong.entity.UserByRoleDO;
+import com.cmpay.sachzhong.entity.UserByRoleDOExample;
 import com.cmpay.sachzhong.entity.UserByRoleDOKey;
 import com.cmpay.sachzhong.service.UserByRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,29 @@ public class UserByRoleServiceImpl implements UserByRoleService {
         UserByRoleDOKey userByRoleDOKey=new UserByRoleDOKey();
         userByRoleDOKey.setUserbyroleId(id);
         return iUserByRoleDao.delete(userByRoleDOKey);
+    }
+
+    @Override
+    public List<UserByRoleDO> getById(int id) {
+        UserByRoleDOExample userByRoleDOExample =new UserByRoleDOExample();
+        UserByRoleDOExample.Criteria criteria =userByRoleDOExample.createCriteria();
+        criteria.andUserbyroleIdEqualTo(id);
+        return iUserByRoleDao.selectByExample(userByRoleDOExample);
+    }
+
+    @Override
+    public List<UserByRoleDO> getByRoleid(int roleid) {
+        UserByRoleDOExample userByRoleDOExample =new UserByRoleDOExample();
+        UserByRoleDOExample.Criteria criteria =userByRoleDOExample.createCriteria();
+        criteria.andUserbyroleRoleidEqualTo(roleid);
+        return iUserByRoleDao.selectByExample(userByRoleDOExample);
+    }
+
+    @Override
+    public List<UserByRoleDO> getByUserid(int userid) {
+        UserByRoleDOExample userByRoleDOExample =new UserByRoleDOExample();
+        UserByRoleDOExample.Criteria criteria =userByRoleDOExample.createCriteria();
+        criteria.andUserbyroleUseridEqualTo(userid);
+        return iUserByRoleDao.selectByExample(userByRoleDOExample);
     }
 }

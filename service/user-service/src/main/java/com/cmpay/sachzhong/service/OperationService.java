@@ -1,5 +1,6 @@
 package com.cmpay.sachzhong.service;
 
+import com.cmpay.sachzhong.entity.MenuDO;
 import com.cmpay.sachzhong.entity.OperationDO;
 
 import java.util.List;
@@ -40,5 +41,20 @@ public interface OperationService {
      * @return
      */
     int delete(int id);
+
+
+    /**
+     * 根据ID查找
+     * @param id
+     * @return
+     */
+    List<OperationDO> getById(int id);
+
+    /**
+     * 根据 operationNumber 操作编号 查找
+     * @param operationNumber
+     * @return
+     */
+    List<OperationDO> getByOperationNumber(String operationNumber);
 
 }

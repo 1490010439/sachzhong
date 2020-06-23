@@ -1,5 +1,6 @@
 package com.cmpay.sachzhong.service;
 
+import com.cmpay.sachzhong.entity.OperationDO;
 import com.cmpay.sachzhong.entity.RoleByMenuDO;
 import com.cmpay.sachzhong.entity.RoleDO;
 
@@ -46,5 +47,28 @@ public interface RoleByMenuService {
      * @return
      */
     int delete(int id);
+
+    /**
+     * 根据ID查找
+     * @param id
+     * @return
+     */
+    List<RoleByMenuDO> getById(int id);
+
+    /**
+     * 根据 Roleid  查找
+     * @param roleid
+     * @return
+     */
+    List<RoleByMenuDO> getByRoleid(int roleid);
+
+
+    /**
+     * 根据 Menuid  查找
+     * @param menuid
+     * @return
+     */
+    List<RoleByMenuDO> getByMenuid(int menuid);
+
 
 }

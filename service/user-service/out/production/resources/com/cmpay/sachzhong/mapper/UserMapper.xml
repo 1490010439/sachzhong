@@ -420,43 +420,39 @@
 
     <select id="selectByBetween" parameterType="com.cmpay.sachzhong.utils.SqlValue"
             resultMap="BaseResultMap">
-        SELECT * FROM user where  ${mynode} between #{betweenStart,jdbcType=INTEGER} and #{betweenEnd,jdbcType=INTEGER} order by ${mynodeby}  ${DESCorASC}
+        SELECT * FROM sachzhong_user where  ${mynode} between #{betweenStart,jdbcType=INTEGER} and #{betweenEnd,jdbcType=INTEGER} order by ${mynodeby}  ${DESCorASC}
     </select>
 
     <select id="selectUserLikeName" parameterType="com.cmpay.sachzhong.utils.SqlValue"
             resultMap="BaseResultMap">
-        SELECT * FROM user where username like ${mynode}
+        SELECT * FROM sachzhong_user where user_name like ${mynode}
     </select>
 
     <select id="selectUserPage" parameterType="com.cmpay.sachzhong.utils.SqlValue"
             resultMap="BaseResultMap">
-        SELECT * FROM user WHERE userdeletetype=#{mynode} ORDER BY userid DESC LIMIT #{betweenStart,jdbcType=INTEGER},#{betweenEnd,jdbcType=INTEGER}
+        SELECT * FROM sachzhong_user WHERE userdeletetype=#{mynode} ORDER BY user_id DESC LIMIT #{betweenStart,jdbcType=INTEGER},#{betweenEnd,jdbcType=INTEGER}
     </select>
 
     <select id="selectUserCount" parameterType="com.cmpay.sachzhong.utils.SqlValue"
             resultType="java.lang.Integer">
-        SELECT COUNT(*) FROM user WHERE userdeletetype=#{mynode}
+        SELECT COUNT(*) FROM sachzhong_user WHERE user_deletetype=#{mynode}
     </select>
 
     <update id="deleteUser" parameterType="com.cmpay.sachzhong.utils.SqlValue">
 
-        update user set userdeletetype='true' where userid=#{IntValue}
+        update sachzhong_user set user_deletetype='true' where user_id=#{IntValue}
 
     </update>
 
     <update id="updateUserMoney" parameterType="com.cmpay.sachzhong.utils.SqlValue">
 
-        UPDATE user set usermoney=${floatNode}  where  userid=${IntValue} ;
+        UPDATE sachzhong_user set user_money=${floatNode}  where  user_id=${IntValue} ;
 
     </update>
 
     <select id="selectLike" parameterType="com.cmpay.sachzhong.utils.SqlValue"
             resultMap="BaseResultMap">
-        SELECT * FROM user where username like  ${mynode} or userphone like  ${mynode} or useridcardname like  ${mynode}
+        SELECT * FROM sachzhong_user where user_name like  ${mynode} or user_phone like  ${mynode} or user_idcardname like  ${mynode}
     </select>
 
-    <select id="selectFriend" parameterType="com.cmpay.sachzhong.utils.SqlValue"
-            resultMap="BaseResultMap">
-        SELECT u.* FROM user as u INNER JOIN friend as f ON u.userid=f.userfriendid where f.userid=${IntValue}
-    </select>
 </mapper>

@@ -1,9 +1,7 @@
 package com.cmpay.sachzhong.controller;
 
-import com.cmpay.lemon.common.utils.BeanUtils;
 import com.cmpay.lemon.framework.annotation.QueryBody;
 import com.cmpay.lemon.framework.data.DefaultRspDTO;
-import com.cmpay.sachzhong.dto.OperationRspDTO;
 import com.cmpay.sachzhong.entity.OperationDO;
 import com.cmpay.sachzhong.service.OperationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +27,10 @@ public class OperationController {
      * 查询信息 根据ID
      */
     @GetMapping("/getById")
-    public DefaultRspDTO<OperationRspDTO> getById(@QueryBody int id)
+    public DefaultRspDTO<List<OperationDO>> getById(@QueryBody int id)
     {
-        OperationDO operationDO = operationService.get(id);
-        OperationRspDTO operationRspDTO=new OperationRspDTO();
-        BeanUtils.copyProperties(operationRspDTO, operationDO);
-        return DefaultRspDTO.newSuccessInstance(operationRspDTO);
+        List<OperationDO> list = operationService.getById(id);
+        return DefaultRspDTO.newSuccessInstance(list);
     }
 
     /**
@@ -84,5 +80,13 @@ public class OperationController {
         return DefaultRspDTO.newSuccessInstance(result);
     }
 
-
+    /**
+     * 根据 operationNumber 操作编号 查找
+     */
+    @GetMapping("/getByOperationNumber")
+    public DefaultRspDTO<List<OperationDO>> getByOperationNumber(String operationNumber)
+    {
+        List<OperationDO> list = operationService.getByOperationNumber(operationNumber);
+        return DefaultRspDTO.newSuccessInstance(list);
+    }
 }

@@ -1,5 +1,6 @@
 package com.cmpay.sachzhong.service;
 
+import com.cmpay.sachzhong.entity.RoleByMenuDO;
 import com.cmpay.sachzhong.entity.UserByRoleDO;
 
 import java.util.List;
@@ -45,5 +46,28 @@ public interface UserByRoleService {
      * @return
      */
     int delete(int id);
+
+
+    /**
+     * 根据ID查找
+     * @param id
+     * @return
+     */
+    List<UserByRoleDO> getById(int id);
+
+    /**
+     * 根据 Roleid  查找
+     * @param roleid
+     * @return
+     */
+    List<UserByRoleDO> getByRoleid(int roleid);
+
+
+    /**
+     * 根据 Userid  查找
+     * @param userid
+     * @return
+     */
+    List<UserByRoleDO> getByUserid(int userid);
 
 }

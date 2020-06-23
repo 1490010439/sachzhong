@@ -2,6 +2,7 @@ package com.cmpay.sachzhong.service.impl;
 
 import com.cmpay.sachzhong.dao.IMenuDao;
 import com.cmpay.sachzhong.entity.MenuDO;
+import com.cmpay.sachzhong.entity.MenuDOExample;
 import com.cmpay.sachzhong.entity.MenuDOKey;
 import com.cmpay.sachzhong.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,21 @@ public class MenuServiceImpl implements MenuService {
         MenuDOKey menuDOKey =new MenuDOKey();
         menuDOKey.setMenuId(id);
         return iMenuDao.delete(menuDOKey);
+    }
+
+    @Override
+    public List<MenuDO> getById(int id) {
+        MenuDOExample menuDOExample =new MenuDOExample();
+        MenuDOExample.Criteria criteria =menuDOExample.createCriteria();
+        criteria.andMenuIdEqualTo(id);
+        return iMenuDao.selectByExample(menuDOExample);
+    }
+
+    @Override
+    public List<MenuDO> getByMenuNumber(String menuNumber) {
+        MenuDOExample menuDOExample =new MenuDOExample();
+        MenuDOExample.Criteria criteria =menuDOExample.createCriteria();
+        criteria.andMenuNumberEqualTo(menuNumber);
+        return iMenuDao.selectByExample(menuDOExample);
     }
 }

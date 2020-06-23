@@ -72,8 +72,6 @@ public interface IUserDao extends BaseDao<UserDO, UserDOKey> {
     //模糊查询用户
     List<UserDO> selectLike(SqlValue mysql);
 
-    //根据用户ID查找好友列表
-    List<UserDO> selectFriend(SqlValue mysql);
 
 
 }

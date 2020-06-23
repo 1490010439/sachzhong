@@ -1,9 +1,7 @@
 package com.cmpay.sachzhong.controller;
 
-import com.cmpay.lemon.common.utils.BeanUtils;
 import com.cmpay.lemon.framework.annotation.QueryBody;
 import com.cmpay.lemon.framework.data.DefaultRspDTO;
-import com.cmpay.sachzhong.dto.RoleRspDTO;
 import com.cmpay.sachzhong.entity.RoleDO;
 import com.cmpay.sachzhong.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +27,10 @@ public class RoleController {
      * 查询信息 根据ID
      */
     @GetMapping("/getById")
-    public DefaultRspDTO<RoleRspDTO> getById(@QueryBody int id)
+    public DefaultRspDTO<List<RoleDO>> getById(@QueryBody int id)
     {
-        RoleDO roleDO = roleService.get(id);
-        RoleRspDTO roleRspDTO=new RoleRspDTO();
-        BeanUtils.copyProperties(roleRspDTO, roleDO);
-        return DefaultRspDTO.newSuccessInstance(roleRspDTO);
+        List<RoleDO> list = roleService.getById(id);
+        return DefaultRspDTO.newSuccessInstance(list);
     }
 
     /**
@@ -84,5 +80,16 @@ public class RoleController {
         return DefaultRspDTO.newSuccessInstance(result);
     }
 
+    /**
+     * 根据 roleNumber 操作编号 查找
+     * @param roleNumber
+     * @return
+     */
+    @GetMapping("/getByRoleNumber")
+    public DefaultRspDTO<List<RoleDO>> getByRoleNumber(String roleNumber)
+    {
+        List<RoleDO> list = roleService.getByRoleNumber(roleNumber);
+        return DefaultRspDTO.newSuccessInstance(list);
+    }
 
 }

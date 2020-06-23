@@ -2,6 +2,7 @@ package com.cmpay.sachzhong.service.impl;
 
 import com.cmpay.sachzhong.dao.IRoleByMenuDao;
 import com.cmpay.sachzhong.entity.RoleByMenuDO;
+import com.cmpay.sachzhong.entity.RoleByMenuDOExample;
 import com.cmpay.sachzhong.entity.RoleByMenuDOKey;
 import com.cmpay.sachzhong.service.RoleByMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,30 @@ public class RoleByMenuServiceImpl implements RoleByMenuService {
         RoleByMenuDOKey roleByMenuDOKey=new RoleByMenuDOKey();
         roleByMenuDOKey.setRolebymenuId(id);
         return iRoleByMenuDao.delete(roleByMenuDOKey);
+    }
+
+    @Override
+    public List<RoleByMenuDO> getById(int id) {
+
+        RoleByMenuDOExample roleByMenuDOExample =new RoleByMenuDOExample();
+        RoleByMenuDOExample.Criteria criteria =roleByMenuDOExample.createCriteria();
+        criteria.andRolebymenuIdEqualTo(id);
+        return iRoleByMenuDao.selectByExample(roleByMenuDOExample);
+    }
+
+    @Override
+    public List<RoleByMenuDO> getByRoleid(int roleid) {
+        RoleByMenuDOExample roleByMenuDOExample =new RoleByMenuDOExample();
+        RoleByMenuDOExample.Criteria criteria =roleByMenuDOExample.createCriteria();
+        criteria.andRolebymenuRoleidEqualTo(roleid);
+        return iRoleByMenuDao.selectByExample(roleByMenuDOExample);
+    }
+
+    @Override
+    public List<RoleByMenuDO> getByMenuid(int menuid) {
+        RoleByMenuDOExample roleByMenuDOExample =new RoleByMenuDOExample();
+        RoleByMenuDOExample.Criteria criteria =roleByMenuDOExample.createCriteria();
+        criteria.andRolebymenuMenuidEqualTo(menuid);
+        return iRoleByMenuDao.selectByExample(roleByMenuDOExample);
     }
 }

@@ -2,6 +2,7 @@ package com.cmpay.sachzhong.service.impl;
 
 import com.cmpay.sachzhong.dao.IOperationDao;
 import com.cmpay.sachzhong.entity.OperationDO;
+import com.cmpay.sachzhong.entity.OperationDOExample;
 import com.cmpay.sachzhong.entity.OperationDOKey;
 import com.cmpay.sachzhong.service.OperationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,23 @@ public class OperationServiceImpl implements OperationService {
         OperationDOKey operationDOKey =new OperationDOKey();
         operationDOKey.setOperationId(id);
         return iOperationDao.delete(operationDOKey);
+    }
+
+    @Override
+    public List<OperationDO> getById(int id) {
+
+        OperationDOExample operationDOExample =new OperationDOExample();
+        OperationDOExample.Criteria criteria =operationDOExample.createCriteria();
+        criteria.andOperationIdEqualTo(id);
+        return iOperationDao.selectByExample(operationDOExample);
+    }
+
+    @Override
+    public List<OperationDO> getByOperationNumber(String operationNumber) {
+
+        OperationDOExample operationDOExample =new OperationDOExample();
+        OperationDOExample.Criteria criteria =operationDOExample.createCriteria();
+        criteria.andOperationNumberEqualTo(operationNumber);
+        return iOperationDao.selectByExample(operationDOExample);
     }
 }

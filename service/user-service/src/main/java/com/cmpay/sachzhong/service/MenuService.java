@@ -45,4 +45,20 @@ public interface MenuService {
      */
     int delete(int id);
 
+    /**
+     * 根据ID查找
+     * @param id
+     * @return
+     */
+    List<MenuDO> getById(int id);
+
+    /**
+     * 根据 menuNumber 菜单编号 查找
+     * @param menuNumber
+     * @return
+     */
+    List<MenuDO> getByMenuNumber(String menuNumber);
+
+
+
 }
