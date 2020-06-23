@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmpay.sachzhong.dao.IMenuDao" >
+
+    <resultMap id="BaseResultMap" type="com.cmpay.sachzhong.entity.MenuDO" >
+        <result column="menu_id" property="menuId" jdbcType="INTEGER" />
+        <result column="menu_grade" property="menuGrade" jdbcType="INTEGER" />
+        <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+        <result column="menu_type" property="menuType" jdbcType="VARCHAR" />
+        <result column="menu_number" property="menuNumber" jdbcType="VARCHAR" />
+        <result column="menu_info" property="menuInfo" jdbcType="VARCHAR" />
+        <result column="menu_opuserid" property="menuOpuserid" jdbcType="INTEGER" />
+        <result column="menu_deletetype" property="menuDeletetype" jdbcType="VARCHAR" />
+        <result column="menu_foundtime" property="menuFoundtime" jdbcType="TIMESTAMP" />
+        <result column="menu_updatetime" property="menuUpdatetime" jdbcType="TIMESTAMP" />
+        <result column="menu_back" property="menuBack" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        menu_id, menu_grade, menu_name, menu_type, menu_number, menu_info, menu_opuserid, 
+        menu_deletetype, menu_foundtime, menu_updatetime, menu_back
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cmpay.sachzhong.entity.MenuDOExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from sachzhong_menu
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <delete id="deleteByExample" parameterType="com.cmpay.sachzhong.entity.MenuDOExample" >
+        delete from sachzhong_menu
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.cmpay.sachzhong.entity.MenuDO" >
+        insert into sachzhong_menu
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="menuId != null" >
+                menu_id,
+            </if>
+            <if test="menuGrade != null" >
+                menu_grade,
+            </if>
+            <if test="menuName != null" >
+                menu_name,
+            </if>
+            <if test="menuType != null" >
+                menu_type,
+            </if>
+            <if test="menuNumber != null" >
+                menu_number,
+            </if>
+            <if test="menuInfo != null" >
+                menu_info,
+            </if>
+            <if test="menuOpuserid != null" >
+                menu_opuserid,
+            </if>
+            <if test="menuDeletetype != null" >
+                menu_deletetype,
+            </if>
+            <if test="menuFoundtime != null" >
+                menu_foundtime,
+            </if>
+            <if test="menuUpdatetime != null" >
+                menu_updatetime,
+            </if>
+            <if test="menuBack != null" >
+                menu_back,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="menuId != null" >
+                #{menuId,jdbcType=INTEGER},
+            </if>
+            <if test="menuGrade != null" >
+                #{menuGrade,jdbcType=INTEGER},
+            </if>
+            <if test="menuName != null" >
+                #{menuName,jdbcType=VARCHAR},
+            </if>
+            <if test="menuType != null" >
+                #{menuType,jdbcType=VARCHAR},
+            </if>
+            <if test="menuNumber != null" >
+                #{menuNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="menuInfo != null" >
+                #{menuInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="menuOpuserid != null" >
+                #{menuOpuserid,jdbcType=INTEGER},
+            </if>
+            <if test="menuDeletetype != null" >
+                #{menuDeletetype,jdbcType=VARCHAR},
+            </if>
+            <if test="menuFoundtime != null" >
+                #{menuFoundtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="menuUpdatetime != null" >
+                #{menuUpdatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="menuBack != null" >
+                #{menuBack,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.cmpay.sachzhong.entity.MenuDOExample" resultType="java.lang.Integer" >
+        select count(*) from sachzhong_menu
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update sachzhong_menu
+        <set >
+            <if test="record.menuId != null" >
+                menu_id = #{record.menuId,jdbcType=INTEGER},
+            </if>
+            <if test="record.menuGrade != null" >
+                menu_grade = #{record.menuGrade,jdbcType=INTEGER},
+            </if>
+            <if test="record.menuName != null" >
+                menu_name = #{record.menuName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.menuType != null" >
+                menu_type = #{record.menuType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.menuNumber != null" >
+                menu_number = #{record.menuNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.menuInfo != null" >
+                menu_info = #{record.menuInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.menuOpuserid != null" >
+                menu_opuserid = #{record.menuOpuserid,jdbcType=INTEGER},
+            </if>
+            <if test="record.menuDeletetype != null" >
+                menu_deletetype = #{record.menuDeletetype,jdbcType=VARCHAR},
+            </if>
+            <if test="record.menuFoundtime != null" >
+                menu_foundtime = #{record.menuFoundtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.menuUpdatetime != null" >
+                menu_updatetime = #{record.menuUpdatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.menuBack != null" >
+                menu_back = #{record.menuBack,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update sachzhong_menu
+        set menu_id = #{record.menuId,jdbcType=INTEGER},
+            menu_grade = #{record.menuGrade,jdbcType=INTEGER},
+            menu_name = #{record.menuName,jdbcType=VARCHAR},
+            menu_type = #{record.menuType,jdbcType=VARCHAR},
+            menu_number = #{record.menuNumber,jdbcType=VARCHAR},
+            menu_info = #{record.menuInfo,jdbcType=VARCHAR},
+            menu_opuserid = #{record.menuOpuserid,jdbcType=INTEGER},
+            menu_deletetype = #{record.menuDeletetype,jdbcType=VARCHAR},
+            menu_foundtime = #{record.menuFoundtime,jdbcType=TIMESTAMP},
+            menu_updatetime = #{record.menuUpdatetime,jdbcType=TIMESTAMP},
+            menu_back = #{record.menuBack,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <select id="find" resultMap="BaseResultMap" parameterType="com.cmpay.sachzhong.entity.MenuDO" >
+        select 
+        <include refid="Base_Column_List" />
+        from sachzhong_menu
+        <where >
+            <if test="menuId != null" >
+                and menu_id = #{menuId,jdbcType=INTEGER}
+            </if>
+            <if test="menuGrade != null" >
+                and menu_grade = #{menuGrade,jdbcType=INTEGER}
+            </if>
+            <if test="menuName != null" >
+                and menu_name = #{menuName,jdbcType=VARCHAR}
+            </if>
+            <if test="menuType != null" >
+                and menu_type = #{menuType,jdbcType=VARCHAR}
+            </if>
+            <if test="menuNumber != null" >
+                and menu_number = #{menuNumber,jdbcType=VARCHAR}
+            </if>
+            <if test="menuInfo != null" >
+                and menu_info = #{menuInfo,jdbcType=VARCHAR}
+            </if>
+            <if test="menuOpuserid != null" >
+                and menu_opuserid = #{menuOpuserid,jdbcType=INTEGER}
+            </if>
+            <if test="menuDeletetype != null" >
+                and menu_deletetype = #{menuDeletetype,jdbcType=VARCHAR}
+            </if>
+            <if test="menuFoundtime != null" >
+                and menu_foundtime = #{menuFoundtime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="menuUpdatetime != null" >
+                and menu_updatetime = #{menuUpdatetime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="menuBack != null" >
+                and menu_back = #{menuBack,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>

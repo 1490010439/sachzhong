@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmpay.sachzhong.dao.IRoleByMenuDao" >
+
+    <resultMap id="BaseResultMap" type="com.cmpay.sachzhong.entity.RoleByMenuDO" >
+        <result column="rolebymenu_id" property="rolebymenuId" jdbcType="INTEGER" />
+        <result column="rolebymenu_roleid" property="rolebymenuRoleid" jdbcType="INTEGER" />
+        <result column="rolebymenu_menuid" property="rolebymenuMenuid" jdbcType="INTEGER" />
+        <result column="rolebymenu_back" property="rolebymenuBack" jdbcType="VARCHAR" />
+        <result column="rolebymenu_opuserid" property="rolebymenuOpuserid" jdbcType="INTEGER" />
+        <result column="rolebymenu_deletetype" property="rolebymenuDeletetype" jdbcType="VARCHAR" />
+        <result column="rolebymenu_foundtime" property="rolebymenuFoundtime" jdbcType="TIMESTAMP" />
+        <result column="rolebymenu_updatetime" property="rolebymenuUpdatetime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        rolebymenu_id, rolebymenu_roleid, rolebymenu_menuid, rolebymenu_back, rolebymenu_opuserid, 
+        rolebymenu_deletetype, rolebymenu_foundtime, rolebymenu_updatetime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cmpay.sachzhong.entity.RoleByMenuDOExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from sachzhong_rolebymenu
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <delete id="deleteByExample" parameterType="com.cmpay.sachzhong.entity.RoleByMenuDOExample" >
+        delete from sachzhong_rolebymenu
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.cmpay.sachzhong.entity.RoleByMenuDO" >
+        insert into sachzhong_rolebymenu
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="rolebymenuId != null" >
+                rolebymenu_id,
+            </if>
+            <if test="rolebymenuRoleid != null" >
+                rolebymenu_roleid,
+            </if>
+            <if test="rolebymenuMenuid != null" >
+                rolebymenu_menuid,
+            </if>
+            <if test="rolebymenuBack != null" >
+                rolebymenu_back,
+            </if>
+            <if test="rolebymenuOpuserid != null" >
+                rolebymenu_opuserid,
+            </if>
+            <if test="rolebymenuDeletetype != null" >
+                rolebymenu_deletetype,
+            </if>
+            <if test="rolebymenuFoundtime != null" >
+                rolebymenu_foundtime,
+            </if>
+            <if test="rolebymenuUpdatetime != null" >
+                rolebymenu_updatetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="rolebymenuId != null" >
+                #{rolebymenuId,jdbcType=INTEGER},
+            </if>
+            <if test="rolebymenuRoleid != null" >
+                #{rolebymenuRoleid,jdbcType=INTEGER},
+            </if>
+            <if test="rolebymenuMenuid != null" >
+                #{rolebymenuMenuid,jdbcType=INTEGER},
+            </if>
+            <if test="rolebymenuBack != null" >
+                #{rolebymenuBack,jdbcType=VARCHAR},
+            </if>
+            <if test="rolebymenuOpuserid != null" >
+                #{rolebymenuOpuserid,jdbcType=INTEGER},
+            </if>
+            <if test="rolebymenuDeletetype != null" >
+                #{rolebymenuDeletetype,jdbcType=VARCHAR},
+            </if>
+            <if test="rolebymenuFoundtime != null" >
+                #{rolebymenuFoundtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="rolebymenuUpdatetime != null" >
+                #{rolebymenuUpdatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.cmpay.sachzhong.entity.RoleByMenuDOExample" resultType="java.lang.Integer" >
+        select count(*) from sachzhong_rolebymenu
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update sachzhong_rolebymenu
+        <set >
+            <if test="record.rolebymenuId != null" >
+                rolebymenu_id = #{record.rolebymenuId,jdbcType=INTEGER},
+            </if>
+            <if test="record.rolebymenuRoleid != null" >
+                rolebymenu_roleid = #{record.rolebymenuRoleid,jdbcType=INTEGER},
+            </if>
+            <if test="record.rolebymenuMenuid != null" >
+                rolebymenu_menuid = #{record.rolebymenuMenuid,jdbcType=INTEGER},
+            </if>
+            <if test="record.rolebymenuBack != null" >
+                rolebymenu_back = #{record.rolebymenuBack,jdbcType=VARCHAR},
+            </if>
+            <if test="record.rolebymenuOpuserid != null" >
+                rolebymenu_opuserid = #{record.rolebymenuOpuserid,jdbcType=INTEGER},
+            </if>
+            <if test="record.rolebymenuDeletetype != null" >
+                rolebymenu_deletetype = #{record.rolebymenuDeletetype,jdbcType=VARCHAR},
+            </if>
+            <if test="record.rolebymenuFoundtime != null" >
+                rolebymenu_foundtime = #{record.rolebymenuFoundtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.rolebymenuUpdatetime != null" >
+                rolebymenu_updatetime = #{record.rolebymenuUpdatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update sachzhong_rolebymenu
+        set rolebymenu_id = #{record.rolebymenuId,jdbcType=INTEGER},
+            rolebymenu_roleid = #{record.rolebymenuRoleid,jdbcType=INTEGER},
+            rolebymenu_menuid = #{record.rolebymenuMenuid,jdbcType=INTEGER},
+            rolebymenu_back = #{record.rolebymenuBack,jdbcType=VARCHAR},
+            rolebymenu_opuserid = #{record.rolebymenuOpuserid,jdbcType=INTEGER},
+            rolebymenu_deletetype = #{record.rolebymenuDeletetype,jdbcType=VARCHAR},
+            rolebymenu_foundtime = #{record.rolebymenuFoundtime,jdbcType=TIMESTAMP},
+            rolebymenu_updatetime = #{record.rolebymenuUpdatetime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <select id="find" resultMap="BaseResultMap" parameterType="com.cmpay.sachzhong.entity.RoleByMenuDO" >
+        select 
+        <include refid="Base_Column_List" />
+        from sachzhong_rolebymenu
+        <where >
+            <if test="rolebymenuId != null" >
+                and rolebymenu_id = #{rolebymenuId,jdbcType=INTEGER}
+            </if>
+            <if test="rolebymenuRoleid != null" >
+                and rolebymenu_roleid = #{rolebymenuRoleid,jdbcType=INTEGER}
+            </if>
+            <if test="rolebymenuMenuid != null" >
+                and rolebymenu_menuid = #{rolebymenuMenuid,jdbcType=INTEGER}
+            </if>
+            <if test="rolebymenuBack != null" >
+                and rolebymenu_back = #{rolebymenuBack,jdbcType=VARCHAR}
+            </if>
+            <if test="rolebymenuOpuserid != null" >
+                and rolebymenu_opuserid = #{rolebymenuOpuserid,jdbcType=INTEGER}
+            </if>
+            <if test="rolebymenuDeletetype != null" >
+                and rolebymenu_deletetype = #{rolebymenuDeletetype,jdbcType=VARCHAR}
+            </if>
+            <if test="rolebymenuFoundtime != null" >
+                and rolebymenu_foundtime = #{rolebymenuFoundtime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="rolebymenuUpdatetime != null" >
+                and rolebymenu_updatetime = #{rolebymenuUpdatetime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmpay.sachzhong.dao.IRoleDao" >
+
+    <resultMap id="BaseResultMap" type="com.cmpay.sachzhong.entity.RoleDO" >
+        <result column="role_id" property="roleId" jdbcType="INTEGER" />
+        <result column="role_grade" property="roleGrade" jdbcType="INTEGER" />
+        <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+        <result column="role_number" property="roleNumber" jdbcType="VARCHAR" />
+        <result column="role_type" property="roleType" jdbcType="VARCHAR" />
+        <result column="role_info" property="roleInfo" jdbcType="VARCHAR" />
+        <result column="role_opuserid" property="roleOpuserid" jdbcType="INTEGER" />
+        <result column="role_deletetype" property="roleDeletetype" jdbcType="VARCHAR" />
+        <result column="role_foundtime" property="roleFoundtime" jdbcType="TIMESTAMP" />
+        <result column="role_updatetime" property="roleUpdatetime" jdbcType="TIMESTAMP" />
+        <result column="role_back" property="roleBack" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        role_id, role_grade, role_name, role_number, role_type, role_info, role_opuserid, 
+        role_deletetype, role_foundtime, role_updatetime, role_back
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cmpay.sachzhong.entity.RoleDOExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from sachzhong_role
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <delete id="deleteByExample" parameterType="com.cmpay.sachzhong.entity.RoleDOExample" >
+        delete from sachzhong_role
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.cmpay.sachzhong.entity.RoleDO" >
+        insert into sachzhong_role
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="roleId != null" >
+                role_id,
+            </if>
+            <if test="roleGrade != null" >
+                role_grade,
+            </if>
+            <if test="roleName != null" >
+                role_name,
+            </if>
+            <if test="roleNumber != null" >
+                role_number,
+            </if>
+            <if test="roleType != null" >
+                role_type,
+            </if>
+            <if test="roleInfo != null" >
+                role_info,
+            </if>
+            <if test="roleOpuserid != null" >
+                role_opuserid,
+            </if>
+            <if test="roleDeletetype != null" >
+                role_deletetype,
+            </if>
+            <if test="roleFoundtime != null" >
+                role_foundtime,
+            </if>
+            <if test="roleUpdatetime != null" >
+                role_updatetime,
+            </if>
+            <if test="roleBack != null" >
+                role_back,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="roleId != null" >
+                #{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="roleGrade != null" >
+                #{roleGrade,jdbcType=INTEGER},
+            </if>
+            <if test="roleName != null" >
+                #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleNumber != null" >
+                #{roleNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="roleType != null" >
+                #{roleType,jdbcType=VARCHAR},
+            </if>
+            <if test="roleInfo != null" >
+                #{roleInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="roleOpuserid != null" >
+                #{roleOpuserid,jdbcType=INTEGER},
+            </if>
+            <if test="roleDeletetype != null" >
+                #{roleDeletetype,jdbcType=VARCHAR},
+            </if>
+            <if test="roleFoundtime != null" >
+                #{roleFoundtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="roleUpdatetime != null" >
+                #{roleUpdatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="roleBack != null" >
+                #{roleBack,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.cmpay.sachzhong.entity.RoleDOExample" resultType="java.lang.Integer" >
+        select count(*) from sachzhong_role
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update sachzhong_role
+        <set >
+            <if test="record.roleId != null" >
+                role_id = #{record.roleId,jdbcType=INTEGER},
+            </if>
+            <if test="record.roleGrade != null" >
+                role_grade = #{record.roleGrade,jdbcType=INTEGER},
+            </if>
+            <if test="record.roleName != null" >
+                role_name = #{record.roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.roleNumber != null" >
+                role_number = #{record.roleNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.roleType != null" >
+                role_type = #{record.roleType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.roleInfo != null" >
+                role_info = #{record.roleInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.roleOpuserid != null" >
+                role_opuserid = #{record.roleOpuserid,jdbcType=INTEGER},
+            </if>
+            <if test="record.roleDeletetype != null" >
+                role_deletetype = #{record.roleDeletetype,jdbcType=VARCHAR},
+            </if>
+            <if test="record.roleFoundtime != null" >
+                role_foundtime = #{record.roleFoundtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.roleUpdatetime != null" >
+                role_updatetime = #{record.roleUpdatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.roleBack != null" >
+                role_back = #{record.roleBack,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update sachzhong_role
+        set role_id = #{record.roleId,jdbcType=INTEGER},
+            role_grade = #{record.roleGrade,jdbcType=INTEGER},
+            role_name = #{record.roleName,jdbcType=VARCHAR},
+            role_number = #{record.roleNumber,jdbcType=VARCHAR},
+            role_type = #{record.roleType,jdbcType=VARCHAR},
+            role_info = #{record.roleInfo,jdbcType=VARCHAR},
+            role_opuserid = #{record.roleOpuserid,jdbcType=INTEGER},
+            role_deletetype = #{record.roleDeletetype,jdbcType=VARCHAR},
+            role_foundtime = #{record.roleFoundtime,jdbcType=TIMESTAMP},
+            role_updatetime = #{record.roleUpdatetime,jdbcType=TIMESTAMP},
+            role_back = #{record.roleBack,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <select id="find" resultMap="BaseResultMap" parameterType="com.cmpay.sachzhong.entity.RoleDO" >
+        select 
+        <include refid="Base_Column_List" />
+        from sachzhong_role
+        <where >
+            <if test="roleId != null" >
+                and role_id = #{roleId,jdbcType=INTEGER}
+            </if>
+            <if test="roleGrade != null" >
+                and role_grade = #{roleGrade,jdbcType=INTEGER}
+            </if>
+            <if test="roleName != null" >
+                and role_name = #{roleName,jdbcType=VARCHAR}
+            </if>
+            <if test="roleNumber != null" >
+                and role_number = #{roleNumber,jdbcType=VARCHAR}
+            </if>
+            <if test="roleType != null" >
+                and role_type = #{roleType,jdbcType=VARCHAR}
+            </if>
+            <if test="roleInfo != null" >
+                and role_info = #{roleInfo,jdbcType=VARCHAR}
+            </if>
+            <if test="roleOpuserid != null" >
+                and role_opuserid = #{roleOpuserid,jdbcType=INTEGER}
+            </if>
+            <if test="roleDeletetype != null" >
+                and role_deletetype = #{roleDeletetype,jdbcType=VARCHAR}
+            </if>
+            <if test="roleFoundtime != null" >
+                and role_foundtime = #{roleFoundtime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="roleUpdatetime != null" >
+                and role_updatetime = #{roleUpdatetime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="roleBack != null" >
+                and role_back = #{roleBack,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>
