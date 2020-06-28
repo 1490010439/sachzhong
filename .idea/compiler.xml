@@ -4,7 +4,7 @@
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.8">
       <module name="SachZhong-User.app-user.main" target="1.8" />
       <module name="SachZhong-User.app-user.test" target="1.8" />
       <module name="SachZhong-User.app.app-base.main" target="1.8" />
