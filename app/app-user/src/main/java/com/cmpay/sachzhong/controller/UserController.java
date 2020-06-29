@@ -1,11 +1,15 @@
 package com.cmpay.sachzhong.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.cmpay.lemon.common.utils.BeanUtils;
+import com.cmpay.lemon.common.utils.JudgeUtils;
 import com.cmpay.lemon.framework.annotation.QueryBody;
 import com.cmpay.lemon.framework.data.DefaultRspDTO;
 import com.cmpay.sachzhong.dto.UserDTO;
+import com.cmpay.sachzhong.dto.UserPageRspDTO;
 import com.cmpay.sachzhong.entity.UserDO;
 import com.cmpay.sachzhong.service.UserService;
+import com.cmpay.sachzhong.utils.BeanConvertUtils;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -27,6 +31,33 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @PostMapping("/list")
+    public DefaultRspDTO<UserPageRspDTO> list(@RequestBody UserPageRspDTO userPageReqDTO) {
+        UserDO userDO = new UserDO();
+        if (JudgeUtils.isNotNull(userPageReqDTO.getUsers())) {
+            userDO = BeanUtils.copyPropertiesReturnDest(new UserDO(), userPageReqDTO.getUsers());
+        }
+        PageInfo<UserDO> pageInfo = userService.getPage(userPageReqDTO.getPageNum(), userPageReqDTO.getPageSize(), userDO);
+        UserPageRspDTO userRspDTO = new UserPageRspDTO();
+        userRspDTO.setUsers(BeanConvertUtils.convertList(pageInfo.getList(), UserDO.class));
+        userRspDTO.setPageNum(pageInfo.getPageNum());
+        userRspDTO.setPageSize(pageInfo.getPageSize());
+        userRspDTO.setPages(pageInfo.getPages());
+        userRspDTO.setTotal(pageInfo.getTotal());
+        return DefaultRspDTO.newSuccessInstance(userRspDTO);
+    }
+
+
+    /**
+     * 查询全部用户信息
+     */
+    @PostMapping("/list1")
+    public DefaultRspDTO<List<UserDO>> list1()
+    {
+        List<UserDO> list = userService.selectUserList();
+        return DefaultRspDTO.newSuccessInstance(list);
+    }
 
 
     /**
