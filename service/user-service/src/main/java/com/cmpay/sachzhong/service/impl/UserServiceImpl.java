@@ -59,10 +59,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDO> getById(int id) {
-         UserDOExample userDOExample=new UserDOExample();
-         UserDOExample.Criteria criteria = userDOExample.createCriteria();
-         criteria.andUserIdEqualTo(id);
-    return iUserDao.selectByExample(userDOExample);
+        UserDOExample userDOExample=new UserDOExample();
+        UserDOExample.Criteria criteria = userDOExample.createCriteria();
+        criteria.andUserIdEqualTo(id);
+        return iUserDao.selectByExample(userDOExample);
     }
 
     @Override
@@ -89,7 +89,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDO> login(String phone, String password) {
+    public List<UserDO> login(String username, String password) {
+        UserDOExample UserDOExample=new UserDOExample();
+        UserDOExample.Criteria criteria = UserDOExample.createCriteria();
+        criteria.andUserNameEqualTo(username);
+        criteria.andUserPasswordEqualTo(password);
+        List<UserDO> mylist=iUserDao.selectByExample(UserDOExample);
+        return mylist;
+    }
+
+    @Override
+    public List<UserDO> loginByPhone(String phone, String password) {
 
         //设置查询语句
         UserDOExample UserDOExample=new UserDOExample();

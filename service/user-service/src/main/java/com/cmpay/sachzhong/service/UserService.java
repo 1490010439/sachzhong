@@ -76,10 +76,18 @@ public interface UserService {
     /**
      * @author SachZhong 钟盛勤
      * @date 2020/6/22 11:21
+     * @info :登陆 username password
+     *
+     */
+    List<UserDO> login(String username, String password);
+
+    /**
+     * @author SachZhong 钟盛勤
+     * @date 2020/6/22 11:21
      * @info :手机登陆 返回用户列表
      *
      */
-     List<UserDO> login(String phone, String password);
+     List<UserDO> loginByPhone(String phone, String password);
 
     /**
      * @author SachZhong 钟盛勤
