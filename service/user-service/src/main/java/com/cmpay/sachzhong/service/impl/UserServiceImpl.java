@@ -45,7 +45,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int update(UserDO entity) {
-        return iUserDao.update(entity);
+        UserDOExample userDOExample=new UserDOExample();
+        UserDOExample.Criteria criteria = userDOExample.createCriteria();
+        criteria.andUserIdEqualTo(entity.getUserId());
+        return iUserDao.updateByExample(entity,userDOExample);
     }
 
     @Override

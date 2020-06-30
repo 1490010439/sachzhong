@@ -5,9 +5,7 @@ import com.cmpay.lemon.common.utils.JudgeUtils;
 import com.cmpay.lemon.framework.annotation.QueryBody;
 import com.cmpay.lemon.framework.data.DefaultRspDTO;
 import com.cmpay.sachzhong.dto.RolePageRspDTO;
-import com.cmpay.sachzhong.dto.UserPageRspDTO;
 import com.cmpay.sachzhong.entity.RoleDO;
-import com.cmpay.sachzhong.entity.UserDO;
 import com.cmpay.sachzhong.service.RoleService;
 import com.cmpay.sachzhong.utils.BeanConvertUtils;
 import com.github.pagehelper.PageInfo;
@@ -30,6 +28,16 @@ public class RoleController {
     @Autowired
     RoleService roleService;
 
+    /**
+     * 查询全部信息
+     */
+    @GetMapping("/select")
+    public DefaultRspDTO<List<RoleDO>> select()
+    {
+        List<RoleDO> list = roleService.selectList();
+        return DefaultRspDTO.newSuccessInstance(list);
+    }
+
 
     @PostMapping("/list")
     public DefaultRspDTO<RolePageRspDTO> list(@RequestBody RolePageRspDTO rolePageRspDTO) {
@@ -51,10 +59,10 @@ public class RoleController {
      * 查询信息 根据ID
      */
     @GetMapping("/getById")
-    public DefaultRspDTO<List<RoleDO>> getById(@QueryBody int id)
+    public DefaultRspDTO<RoleDO> getById(@QueryBody int id)
     {
-        List<RoleDO> list = roleService.getById(id);
-        return DefaultRspDTO.newSuccessInstance(list);
+        RoleDO roleDO = roleService.getById(id).get(0);
+        return DefaultRspDTO.newSuccessInstance(roleDO);
     }
 
     /**

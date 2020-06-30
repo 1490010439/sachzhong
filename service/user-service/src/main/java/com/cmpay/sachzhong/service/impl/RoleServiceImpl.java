@@ -5,7 +5,6 @@ import com.cmpay.sachzhong.dao.IRoleDao;
 import com.cmpay.sachzhong.entity.RoleDO;
 import com.cmpay.sachzhong.entity.RoleDOExample;
 import com.cmpay.sachzhong.entity.RoleDOKey;
-import com.cmpay.sachzhong.entity.UserDO;
 import com.cmpay.sachzhong.service.RoleService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,14 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     IRoleDao iRoleDao;
+
+
+    @Override
+    public List<RoleDO> selectList() {
+        RoleDOExample roleDOExample =new RoleDOExample();
+        RoleDOExample.Criteria criteria =roleDOExample.createCriteria();
+        return iRoleDao.selectByExample(roleDOExample);
+    }
 
     @Override
     public RoleDO get(int id) {

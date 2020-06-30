@@ -42,7 +42,11 @@ public class UserByRoleServiceImpl implements UserByRoleService {
 
     @Override
     public int update(UserByRoleDO entity) {
-        return iUserByRoleDao.update(entity);
+
+        UserByRoleDOExample userByRoleDOExample =new UserByRoleDOExample();
+        UserByRoleDOExample.Criteria criteria =userByRoleDOExample.createCriteria();
+        criteria.andUserbyroleIdEqualTo(entity.getUserbyroleId());
+        return iUserByRoleDao.updateByExample(entity,userByRoleDOExample);
     }
 
     @Override

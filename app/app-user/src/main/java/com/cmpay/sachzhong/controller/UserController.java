@@ -5,9 +5,14 @@ import com.cmpay.lemon.common.utils.BeanUtils;
 import com.cmpay.lemon.common.utils.JudgeUtils;
 import com.cmpay.lemon.framework.annotation.QueryBody;
 import com.cmpay.lemon.framework.data.DefaultRspDTO;
+import com.cmpay.sachzhong.dto.UserByRoleDTO;
 import com.cmpay.sachzhong.dto.UserDTO;
 import com.cmpay.sachzhong.dto.UserPageRspDTO;
+import com.cmpay.sachzhong.entity.RoleDO;
+import com.cmpay.sachzhong.entity.UserByRoleDO;
 import com.cmpay.sachzhong.entity.UserDO;
+import com.cmpay.sachzhong.service.RoleService;
+import com.cmpay.sachzhong.service.UserByRoleService;
 import com.cmpay.sachzhong.service.UserService;
 import com.cmpay.sachzhong.utils.BeanConvertUtils;
 import com.github.pagehelper.PageInfo;
@@ -15,7 +20,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -31,6 +43,12 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserByRoleService userByRoleService;
+
+    @Autowired
+    private RoleService roleService;
 
     @PostMapping("/list")
     public DefaultRspDTO<UserPageRspDTO> list(@RequestBody UserPageRspDTO userPageReqDTO) {
@@ -86,10 +104,37 @@ public class UserController {
      * 查询用户信息 根据ID
      */
     @GetMapping("/getById")
-    public DefaultRspDTO<List<UserDO>> getById(@Validated @QueryBody int id)
+    public DefaultRspDTO<UserDO> getById(@Validated @QueryBody int id)
     {
-        List<UserDO> list = userService.getById(id);
-        return DefaultRspDTO.newSuccessInstance(list);
+        UserDO userDO = userService.getById(id).get(0);
+
+        //根据ID获取用户
+        UserByRoleDTO userByRoleDTO =new UserByRoleDTO();
+        userByRoleDTO.setUserId(userDO.getUserId());
+        userByRoleDTO.setUserName(userDO.getUserName());
+        userByRoleDTO.setUserMail(userDO.getUserMail());
+        userByRoleDTO.setUserPassword(userDO.getUserPassword());
+        userByRoleDTO.setUserPhone(userDO.getUserPhone());
+        userByRoleDTO.setUserType(userDO.getUserType());
+
+        //获取用户关联的角色
+        List<UserByRoleDO> userByRoles =  userByRoleService.getByUserid(userByRoleDTO.getUserId());
+
+        //初始化角色列表
+        List<RoleDO> roleIds=new ArrayList<RoleDO>();
+
+        for(int i=0;i<userByRoles.size();i++)
+        {
+            //用户角色关联对象
+            UserByRoleDO userByRoleDO = userByRoles.get(i);
+            //充填角色列表
+            roleIds.addAll( roleService.getById(userByRoleDO.getUserbyroleId()));
+        }
+
+        //把角色列表充填到 DTO对象
+        userByRoleDTO.setRoleIdList(roleIds);
+
+        return DefaultRspDTO.newSuccessInstance(userByRoleDTO);
     }
 
     /**
@@ -115,14 +160,56 @@ public class UserController {
         return DefaultRspDTO.newSuccessInstance(pageInfo);
     }
 
+    /**
+     * 更新用户信息
+     */
+    @PostMapping("/update1")
+    public DefaultRspDTO<Integer> update1(@Validated @RequestBody UserDO userDO) {
+
+        int result = userService.update(userDO);
+
+        return DefaultRspDTO.newSuccessInstance(result);
+    }
+
 
     /**
      * 更新用户信息
      */
-    @PutMapping("/update")
-    public DefaultRspDTO<Integer> update(@Validated @RequestBody UserDO userDO) {
+    @PostMapping("/update")
+    public DefaultRspDTO<Integer> update(@Validated @RequestBody UserByRoleDTO userByRoleDTO) {
 
+        List<Integer> roleIds =userByRoleDTO.getRoleIds();
+
+        UserDO userDO =new UserDO();
+        //充填用户
+        userDO.setUserId(userByRoleDTO.getUserId());
+        userDO.setUserName(userByRoleDTO.getUserName());
+        userDO.setUserMail(userByRoleDTO.getUserMail());
+        userDO.setUserPassword(userByRoleDTO.getUserPassword());
+        userDO.setUserPhone(userByRoleDTO.getUserPhone());
+        userDO.setUserType(userByRoleDTO.getUserType());
+
+        //插入用户
         int result = userService.update(userDO);
+
+//        //插入用户角色关联表
+//        for (int i=0;i<roleIds.size();i++)
+//        {
+//            //用户角色关联对象
+//            UserByRoleDO userByRoleDO =new UserByRoleDO();
+//
+//            //角色ID
+//            Integer roleId = roleIds.get(0);
+//            userByRoleDO.setUserbyroleRoleid(roleId);
+//
+//            //用户ID
+//            userByRoleDO.setUserbyroleUserid(userDO.getUserId());
+//            userByRoleDO.setUserbyroleDeletetype("false");
+//
+//            result=userByRoleService.update(userByRoleDO);
+//
+//        }
+
 
         return DefaultRspDTO.newSuccessInstance(result);
     }
@@ -132,9 +219,55 @@ public class UserController {
      * 添加用户信息
      */
     @PostMapping("/insert")
-    public DefaultRspDTO<Integer> insert(@Validated @RequestBody UserDO userDO) {
+    public DefaultRspDTO<Integer> insert(@Validated @RequestBody UserByRoleDTO userByRoleDTO) {
 
+        //生成用户ID
+        Integer userid = UUID.randomUUID().hashCode();
+        System.out.println("userid:"+userid);
+
+        List<Integer> roleIds =userByRoleDTO.getRoleIds();
+
+        UserDO userDO =new UserDO();
+        //充填用户
+        userDO.setUserId(userid);
+        userDO.setUserName(userByRoleDTO.getUserName());
+        userDO.setUserMail(userByRoleDTO.getUserMail());
+        userDO.setUserPassword(userByRoleDTO.getUserPassword());
+        userDO.setUserPhone(userByRoleDTO.getUserPhone());
+        userDO.setUserType(userByRoleDTO.getUserType());
+        //设置注册时间
+        LocalDateTime localDateTime =LocalDateTime.now();
+        userDO.setUserRegtime(localDateTime);
+
+        //插入用户
         int result = userService.insert(userDO);
+
+        //插入用户角色关联表
+        for (int i=0;i<roleIds.size();i++)
+        {
+            //用户角色关联对象
+            UserByRoleDO userByRoleDO =new UserByRoleDO();
+
+            //生成关联表ID
+            Integer userByRoleDOid = UUID.randomUUID().hashCode();
+            System.out.println("userByRoleDOid:"+userByRoleDOid);
+            userByRoleDO.setUserbyroleId(userByRoleDOid);
+            userByRoleDO.setUserbyroleOpuserid(1);
+            userByRoleDO.setUserbyroleBack("用户ID:"+userid.toString()+",角色ID:"+userByRoleDOid.toString());
+            //角色ID
+            Integer roleId = roleIds.get(0);
+            userByRoleDO.setUserbyroleRoleid(roleId);
+
+            //用户ID
+            userByRoleDO.setUserbyroleUserid(userid);
+            userByRoleDO.setUserbyroleDeletetype("false");
+            LocalDateTime localDateTime1 =LocalDateTime.now();
+            userByRoleDO.setUserbyroleFoundtime(localDateTime1);
+
+            result=userByRoleService.insert(userByRoleDO);
+
+        }
+
 
         return DefaultRspDTO.newSuccessInstance(result);
     }
@@ -184,7 +317,7 @@ public class UserController {
      *
      */
     @PostMapping("/loginByPhone")
-     public DefaultRspDTO<List<UserDO>> loginByPhone(@Validated @RequestBody  String phone, String password)
+    public DefaultRspDTO<List<UserDO>> loginByPhone(@Validated @RequestBody  String phone, String password)
     {
         List<UserDO> list = userService.loginByPhone(phone,password);
         return DefaultRspDTO.newSuccessInstance(list);

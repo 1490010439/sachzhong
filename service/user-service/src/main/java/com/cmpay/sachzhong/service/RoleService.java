@@ -1,7 +1,6 @@
 package com.cmpay.sachzhong.service;
 
 import com.cmpay.sachzhong.entity.RoleDO;
-import com.cmpay.sachzhong.entity.UserDO;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
@@ -12,6 +11,14 @@ import java.util.List;
  * @date 2020/6/20 14:41
  */
 public interface RoleService {
+
+    /**
+     * @author SachZhong 钟盛勤
+     * @date 2020/6/22 11:21
+     * @info :查询所有列表
+     *
+     */
+    List<RoleDO> selectList();
 
     /**
      * 根据ID查找
